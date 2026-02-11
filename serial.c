@@ -102,8 +102,8 @@ int serial_read_offset()
 /*
  * serial_read_flush()
  *
- * czy¶ci bufor wej¶ciowy portu szeregowego, na wypadek gdyby czeka³y tam
- * jakie¶ nieodebrane przez program dane.
+ * czyÅ›ci bufor wejÅ›ciowy portu szeregowego, na wypadek gdyby czekaÅ‚y tam
+ * jakieÅ› nieodebrane przez program dane.
  */
 void serial_read_flush()
 {
@@ -122,7 +122,7 @@ void serial_read_flush()
 /*
  * serial_write_nak()
  *
- * zapisuje @count bajtów do portu szeregowego nie czekaj±c na ich
+ * zapisuje @count bajtÃ³w do portu szeregowego nie czekajÄ…c na ich
  * potwierdzenie.
  */
 void serial_write_nak(int count, ...)
@@ -153,8 +153,8 @@ void serial_write_nak(int count, ...)
 /*
  * serial_write_ack()
  *
- * zapisuje @count bajtów do portu szeregowego i czeka na ich potwierdzenie
- * z urz±dzenia. w razie braku potwierdzenia wychodzi z programu.
+ * zapisuje @count bajtÃ³w do portu szeregowego i czeka na ich potwierdzenie
+ * z urzÄ…dzenia. w razie braku potwierdzenia wychodzi z programu.
  */
 void serial_write_ack(int count, ...)
 {
@@ -197,7 +197,7 @@ void serial_write_ack(int count, ...)
 /*
  * serial_open()
  *
- * otwiera podany port szeregowy. w przypadku b³êdu wychodzi z programu.
+ * otwiera podany port szeregowy. w przypadku bÅ‚Ä™du wychodzi z programu.
  */
 void serial_open(const char *device)
 {
@@ -303,7 +303,7 @@ void serial_close()
 /*
  * serial_error()
  *
- * wy¶wietla b³±d dotycz±cy komunikacji z urz±dzeniem i wychodzi z programu.
+ * wyÅ›wietla bÅ‚Ä…d dotyczÄ…cy komunikacji z urzÄ…dzeniem i wychodzi z programu.
  */
 void serial_error(const char *desc)
 {

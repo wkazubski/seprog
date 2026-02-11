@@ -10,8 +10,8 @@
 /*
  * chip_erase()
  *
- * czy¶ci zawarto¶æ uk³adu. zwraca -1 w przypadku powodzenia lub offset
- * pierwszej komórki, która nie jest czysta.
+ * czyÅ›ci zawartoÅ›Ä‡ ukÅ‚adu. zwraca -1 w przypadku powodzenia lub offset
+ * pierwszej komÃ³rki, ktÃ³ra nie jest czysta.
  */
 int chip_erase()
 {
@@ -33,10 +33,10 @@ int chip_erase()
 /*
  * chip_blank_check()
  *
- * sprawdza, czy uk³ad jest czysty. @offset okre¶la pierwsz± sprawdzan±
- * komórkê, @size oznacza ilo¶æ komórek do sprawdzenia. je¶li @size bêdzie
- * równe -1, sprawdzany jest ca³y uk³ad. zwraca @size, je¶li uk³ad jest
- * czysty lub offset pierwszej komórki, która nie jest czysta.
+ * sprawdza, czy ukÅ‚ad jest czysty. @offset okreÅ›la pierwszÄ… sprawdzanÄ…
+ * komÃ³rkÄ™, @size oznacza iloÅ›Ä‡ komÃ³rek do sprawdzenia. jeÅ›li @size bÄ™dzie
+ * rÃ³wne -1, sprawdzany jest caÅ‚y ukÅ‚ad. zwraca @size, jeÅ›li ukÅ‚ad jest
+ * czysty lub offset pierwszej komÃ³rki, ktÃ³ra nie jest czysta.
  */
 int chip_blank_check(int offset, int size)
 {
@@ -73,8 +73,8 @@ int chip_blank_check(int offset, int size)
 /*
  * chip_read()
  *
- * czyta @size bajtów pocz±wszy od @offset do bufora @buffer. w przypadku
- * b³êdu transmisji wychodzi z programu.
+ * czyta @size bajtÃ³w poczÄ…wszy od @offset do bufora @buffer. w przypadku
+ * bÅ‚Ä™du transmisji wychodzi z programu.
  */
 void chip_read(int offset, int size, unsigned char *buffer)
 {
@@ -105,9 +105,9 @@ void chip_read(int offset, int size, unsigned char *buffer)
 /*
  * chip_write()
  *
- * zapisuje @size bajtów uk³adu pocz±wszy od @offset z bufora @buffer.
- * w przypadku b³êdu zwraca offset komórki, która siê nie zgadza, lub
- * @size, je¶li wszystko jest w porz±dku.
+ * zapisuje @size bajtÃ³w ukÅ‚adu poczÄ…wszy od @offset z bufora @buffer.
+ * w przypadku bÅ‚Ä™du zwraca offset komÃ³rki, ktÃ³ra siÄ™ nie zgadza, lub
+ * @size, jeÅ›li wszystko jest w porzÄ…dku.
  */
 int chip_write(int offset, int size, unsigned char *buffer)
 {
@@ -160,7 +160,7 @@ int chip_write(int offset, int size, unsigned char *buffer)
 /*
  * chip_fuse()
  *
- * zapisuje bity blokady lub konfiguracji. w przypadku b³êdu wychodzi
+ * zapisuje bity blokady lub konfiguracji. w przypadku bÅ‚Ä™du wychodzi
  * z programu.
  */
 void chip_fuse(unsigned char value)
