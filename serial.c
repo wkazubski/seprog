@@ -13,6 +13,7 @@
 #include <termios.h>
 #include <errno.h>
 #include "main.h"
+#include "serial.h"
 
 static struct termios oldtio;
 static int fd = -1;
@@ -31,6 +32,8 @@ static int fd = -1;
 static HANDLE sfd = NULL;
 
 #endif /* WIN32 */
+
+int verbose = 0;
 
 #define debug(x, y...) do { if (verbose) fprintf(stderr, x, y); } while(0)
 

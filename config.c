@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include "config.h"
 
-struct chip *chip = NULL;
+struct chip_s *chip = NULL;
 
-struct chip chips[] = {
+struct chip_s chips[] = {
 	{ "2716",	0x00,   2048,  8, VCC5, VPP25, 100 },
 	{ "2732",	0x01,   4096,  8, VCC5, VPP25, 100 },
 	{ "2732a",	0x01,   4096,  8, VCC5, VPP21, 100 },

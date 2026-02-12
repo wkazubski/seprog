@@ -11,6 +11,6 @@
 
 #define VERSION "0.3"
 
-int verbose;
+extern int verbose;
 
 #endif

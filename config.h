@@ -8,7 +8,7 @@
 #define VPP21 0x22
 #define VPP25 0x23
 
-struct chip {
+struct chip_s {
 	char *name;
 	unsigned char type;
 	unsigned long size;
@@ -18,8 +18,8 @@ struct chip {
 	unsigned long delay;
 };
 
-extern struct chip chips[];
+extern struct chip_s chips[];
 
-struct chip *chip;
+extern struct chip_s *chip;
 
 #endif
