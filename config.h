@@ -1,10 +1,12 @@
 #ifndef __CHIPS_H
 #define __CHIPS_H
 
-#define VCC5 0x60
+#define VCC5 0x00
 #define VCC12 0x61
-#define VPP5 VCC5
-#define VPP12 VCC12
+#define VPP5 0x20
+#define VPP12 0x21
+#define VPP21 0x22
+#define VPP25 0x23
 
 struct chip {
 	char *name;
