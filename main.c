@@ -43,6 +43,7 @@ void usage(char *a0)
 "  -w, --write=FILE\n"
 "  -f, --fuse=VALUE\n"
 "\n"
+"  -n, --noflowctrl\n"
 "  -v, --verbose\n"
 "  -V, --version\n"
 "  -h, --help\n"
@@ -64,6 +65,7 @@ static struct option long_options[] = {
 	{ "read", 1, 0, 'r' },
 	{ "write", 1, 0, 'w' },
 	{ "fuse", 1, 0, 'f' },
+	{ "noflowctrl", 0, 0, 'n' },
 	{ "verbose", 0, 0, 'v' },
 	{ "version", 0, 0, 'V' },
 	{ "help", 0, 0, 'h' },
@@ -82,7 +84,7 @@ int main(int argc, char **argv)
 
 	chip = &chips[DEFAULT_CHIP];
 
-	while ((c = getopt_long(argc, argv, "c:p:o:s:ebr:w:f:vVh", long_options, &optind2)) != -1) {
+	while ((c = getopt_long(argc, argv, "c:p:o:s:ebr:w:f:nvVh", long_options, &optind2)) != -1) {
 		switch (c) {
 			case 'c':
 			{
@@ -276,6 +278,12 @@ int main(int argc, char **argv)
 			{
 				usage(argv[0]);
 				exit(0);
+			}
+
+			case 'n':
+			{
+				flow_ctrl = 0;
+				break;
 			}
 
 			case 'v':

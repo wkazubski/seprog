@@ -12,5 +12,6 @@
 #define VERSION "0.3"
 
 extern int verbose;
+extern int flow_ctrl;
 
 #endif

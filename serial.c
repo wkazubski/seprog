@@ -34,6 +34,7 @@ static HANDLE sfd = NULL;
 #endif /* WIN32 */
 
 int verbose = 0;
+int flow_ctrl = 1;
 
 #define debug(x, y...) do { if (verbose) fprintf(stderr, x, y); } while(0)
 
@@ -218,13 +219,16 @@ void serial_open(const char *device)
 	tcgetattr(fd, &oldtio);
 
 	memset(&newtio, 0, sizeof(newtio));
-	newtio.c_cflag = B57600 | CRTSCTS | CS8 | CLOCAL | CREAD;
+	newtio.c_cflag = CS8 | CLOCAL | CREAD;
+	if (flow_ctrl)
+		newtio.c_cflag |= CRTSCTS;
 	newtio.c_iflag = IGNPAR;
 	newtio.c_oflag = 0;
 	newtio.c_lflag = PENDIN;
 	newtio.c_cc[VTIME] = 0;
 	newtio.c_cc[VMIN] = 1;
 
+	// Set in/out baud rate to be 57600
 	cfsetispeed(&newtio, B57600);
 	cfsetospeed(&newtio, B57600);
 
@@ -260,7 +264,8 @@ void serial_open(const char *device)
 	serial_dcb.fBinary = TRUE;
 	serial_dcb.fParity = FALSE;
 	serial_dcb.fOutxDsrFlow = FALSE; /* dsr influences outgoing traffic [y/N] */
-	serial_dcb.fDtrControl = DTR_CONTROL_ENABLE;
+	if (flow_ctrl)
+		serial_dcb.fDtrControl = DTR_CONTROL_ENABLE;
 	serial_dcb.fDsrSensitivity = FALSE; /* dsr influences incoming traffic [y/N] */
 	serial_dcb.fOutX = FALSE; /* XON/XOFF on output - [y/N] */
 	serial_dcb.fInX = FALSE; /* XON/XOFF on input - [y/N] */
