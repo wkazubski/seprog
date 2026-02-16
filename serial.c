@@ -224,6 +224,10 @@ void serial_open(const char *device)
 	newtio.c_lflag = PENDIN;
 	newtio.c_cc[VTIME] = 0;
 	newtio.c_cc[VMIN] = 1;
+
+	cfsetispeed(&newtio, B57600);
+	cfsetospeed(&newtio, B57600);
+
 	tcflush(fd, TCIFLUSH);
 	tcsetattr(fd, TCSANOW, &newtio);
 
