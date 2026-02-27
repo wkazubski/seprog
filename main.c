@@ -36,6 +36,11 @@ void usage(char *a0)
 "  -p, --port=PORT     (default: " DEFAULT_DEVICE ")\n"
 "  -o, --offset=VALUE\n"
 "  -s, --size=VALUE\n"
+"  -a, --algorithm=VALUE    (EPROM only)\n"
+"          0 - standard\n"
+"          1 - interactive\n"
+"          2 - INTELigent (default)\n"
+"          3 - quick\n"
 "\n"
 "  -e, --erase\n"
 "  -b, --black-check\n"
@@ -60,6 +65,7 @@ static struct option long_options[] = {
 	{ "port", 1, 0, 'p' },
 	{ "offset", 1, 0, 'o' },
 	{ "size", 1, 0, 's' },
+	{ "algorithm", 1, 0, 'a' },
 	{ "erase", 0, 0, 'e' },
 	{ "blank-check", 0, 0, 'b' },
 	{ "read", 1, 0, 'r' },
@@ -76,6 +82,7 @@ int main(int argc, char **argv)
 {
 	int c, optind2, offset = 0, size = 0;
 	const char *port = DEFAULT_DEVICE;
+	unsigned char vpp = 0x20;
 
 	if (argc < 2) {
 		usage(argv[0]);
@@ -84,7 +91,7 @@ int main(int argc, char **argv)
 
 	chip = &chips[DEFAULT_CHIP];
 
-	while ((c = getopt_long(argc, argv, "c:p:o:s:ebr:w:f:nvVh", long_options, &optind2)) != -1) {
+	while ((c = getopt_long(argc, argv, "c:p:o:s:a:ebr:w:f:nvVh", long_options, &optind2)) != -1) {
 		switch (c) {
 			case 'c':
 			{
@@ -109,6 +116,7 @@ int main(int argc, char **argv)
 				
 				offset = 0;
 				size = chip->size;
+				vpp = chip->vpp;
 
 				break;
 			}
@@ -147,7 +155,21 @@ int main(int argc, char **argv)
 
 				break;
 			}
-			
+
+			case 'a':
+			{
+				char *endptr;
+				unsigned char a;
+
+				a = strtol(optarg, &endptr, 0);
+				if (a <= chip->algmax) {
+					vpp &= 0xcf;
+					vpp |= (a & 0x03) << 4;
+				} 
+
+				break;
+			}
+
 			case 'b':
 			{
 				int res;
@@ -263,9 +285,9 @@ int main(int argc, char **argv)
 				fclose(fp);
 
 				printf("Writing %s (offset=0x%.4x, size=0x%.4x)...\n", chip->name, offset, size);
-	
-				result = chip_write(offset, size, buf);
-	
+
+				result = chip_write(offset, size, vpp, buf);
+
 				if (result != size)
 					printf("Error at offset %.4x\n", result);
 				else

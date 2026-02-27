@@ -109,12 +109,12 @@ void chip_read(int offset, int size, unsigned char *buffer)
  * w przypadku błędu zwraca offset komórki, która się nie zgadza, lub
  * @size, jeśli wszystko jest w porządku.
  */
-int chip_write(int offset, int size, unsigned char *buffer)
+int chip_write(int offset, int size, unsigned char vpp, unsigned char *buffer)
 {
 	int count = 0, ssize = size;
 
 	serial_write_ack(2, 0x44, chip->type);
-	serial_write_ack(2, 0x56, chip->vpp);
+	serial_write_ack(2, 0x56, vpp);
 	serial_write_ack(2, 0x47, 0x30);
 	serial_write_ack(4, 0x41, ((offset >> 16) & 255), ((offset >> 8) & 255), (offset & 255));
 	if (chip->bits == 16)
