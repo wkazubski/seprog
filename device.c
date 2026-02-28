@@ -180,3 +180,15 @@ void chip_fuse(unsigned char value)
 	serial_write_ack(1, 0x48);
 }
 
+/*
+ * firmware_version()
+ *
+ * orczytuje wersję firmware programtora
+ */
+void firmware_version(char* fw)
+{
+	serial_write_ack(1, 0x5a);
+
+	serial_read_fw_version(fw);
+}
+

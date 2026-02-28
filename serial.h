@@ -3,6 +3,7 @@
 
 unsigned char serial_read();
 int serial_read_offset();
+void serial_read_fw_version(char* fw);
 void serial_read_flush();
 void serial_write_nak(int count, ...);
 void serial_write_ack(int count, ...);

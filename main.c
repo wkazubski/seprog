@@ -52,6 +52,7 @@ void usage(char *a0)
 "  -v, --verbose\n"
 "  -V, --version\n"
 "  -h, --help\n"
+"  -z, --fwversion\n"
 "\n"
 "Available chips:\n"
 "%s\n"
@@ -75,6 +76,7 @@ static struct option long_options[] = {
 	{ "verbose", 0, 0, 'v' },
 	{ "version", 0, 0, 'V' },
 	{ "help", 0, 0, 'h' },
+	{ "fwversion", 0, 0, 'z' },
 	{ 0, 0, 0, 0 }
 };
 
@@ -91,7 +93,7 @@ int main(int argc, char **argv)
 
 	chip = &chips[DEFAULT_CHIP];
 
-	while ((c = getopt_long(argc, argv, "c:p:o:s:a:ebr:w:f:nvVh", long_options, &optind2)) != -1) {
+	while ((c = getopt_long(argc, argv, "c:p:o:s:a:ebr:w:f:nvVhz", long_options, &optind2)) != -1) {
 		switch (c) {
 			case 'c':
 			{
@@ -317,6 +319,17 @@ int main(int argc, char **argv)
 			case 'V':
 			{
 				printf("seprog %s\n", VERSION);
+				break;
+			}
+
+			case 'z':
+			{
+				char fw[] = "?.??";
+
+				serial_open(port);
+
+				firmware_version(fw);
+				printf("Firmware version %s\n", fw);
 				break;
 			}
 

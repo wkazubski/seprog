@@ -104,6 +104,19 @@ int serial_read_offset()
 }
 
 /*
+ * serial_read_fw_version()
+ *
+ * czyta czteroznakowy  numer wersji firmware
+ * z programu.
+ */
+void serial_read_fw_version(char* fw)
+{
+	int i;
+	for (i=0; i<4; i++)
+		fw[i] = serial_read();
+}
+
+/*
  * serial_read_flush()
  *
  * czyści bufor wejściowy portu szeregowego, na wypadek gdyby czekały tam
